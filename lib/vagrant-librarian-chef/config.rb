@@ -14,6 +14,14 @@ module VagrantPlugins
       def cheffile_path
         @cheffile_path ||= @cheffile_dir ? File.join(@cheffile_dir, 'Cheffile') : 'Cheffile'
       end
+
+      def cookbooks_path
+        @cookbooks_path ||= @cheffile_dir ? File.join(@cheffile_dir, 'cookbooks') : 'cookbooks'
+      end
+
+      def cheffile_present?(env)
+        FileTest.exist? File.join(env[:root_path], cheffile_path)
+      end
     end
   end
 end
